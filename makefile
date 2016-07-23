@@ -30,4 +30,4 @@ install_packages:
 
 
 update_pkglist:
-	yaourt -Qqen > pkglist.txt
+	yaourt -Qqn > pkglist.txt
