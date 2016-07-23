@@ -1,10 +1,31 @@
 install:
 	mkdir -p ~/.config
 	# nvim
-	ln -s `pwd`/nvim ~/.config/nvim
+	ln -f -s `pwd`/nvim ~/.config/nvim
 	# vifm
-	ln -s `pwd`/vifm ~/.config/vifm
+	ln -f -s `pwd`/vifm ~/.config/vifm
 	# xmonad
-	ln -s `pwd`/xmonad ~/.xmonad
-	#terminator
-	ln -s `pwd`/terminator ~/.config/terminator
+	ln -f -s `pwd`/xmonad ~/.xmonad
+	# terminator
+	ln -f -s `pwd`/terminator ~/.config/terminator
+	# install packages
+	yaourt --needed -S - < pkglist.txt
+
+install_package_query:
+	mkdir -p build
+	rm -rf build/package-query-git
+	cd build; curl -L "https://aur.archlinux.org/cgit/aur.git/snapshot/package-query-git.tar.gz" > package-query-git.tar.gz
+	cd build; tar -xvf package-query-git.tar.gz
+	cd build/package-query-git; makepkg -s
+	sudo pacman -U build/package-query-git/*.pkg*
+
+install_yaourt: install_package_query
+	mkdir -p build
+	rm -rf build/yaourt-git
+	cd build; curl -L "https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt-git.tar.gz" > yaourt-git.tar.gz
+	cd build; tar -xvf yaourt-git.tar.gz
+	cd build/yaourt-git; makepkg -s
+	sudo pacman -U build/yaourt-git/*.pkg*
+
+update_pkglist:
+	yaourt -Qqen > pkglist.txt

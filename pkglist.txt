@@ -43,6 +43,7 @@ man-pages
 mdadm
 nano
 netctl
+openssh
 pacman
 patch
 pciutils
