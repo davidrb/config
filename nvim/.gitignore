@@ -1,0 +1,6 @@
+plugged/
+swap/*
+undo/*
+backup/*
+.init.vim-rplugin\~
+.netrwhist
