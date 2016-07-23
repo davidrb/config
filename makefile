@@ -8,8 +8,6 @@ install:
 	ln -f -s `pwd`/xmonad ~/.xmonad
 	# terminator
 	ln -f -s `pwd`/terminator ~/.config/terminator
-	# install packages
-	yaourt --needed -S - < pkglist.txt
 
 install_package_query:
 	mkdir -p build
@@ -26,6 +24,10 @@ install_yaourt: install_package_query
 	cd build; tar -xvf yaourt-git.tar.gz
 	cd build/yaourt-git; makepkg -s
 	sudo pacman -U build/yaourt-git/*.pkg*
+
+install_packages: install_yaourt
+	yaourt --needed -S - < pkglist.txt
+
 
 update_pkglist:
 	yaourt -Qqen > pkglist.txt
