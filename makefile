@@ -25,7 +25,7 @@ install_yaourt: install_package_query
 	cd build/yaourt-git; makepkg -s
 	sudo pacman -U build/yaourt-git/*.pkg*
 
-install_packages: install_yaourt
+install_packages:
 	yaourt --needed -S - < pkglist.txt
 
 
