@@ -1,0 +1,14 @@
+#!/bin/env ruby
+
+require_relative 'color'
+
+# network
+begin
+  routes = `route -n`.chomp.lines
+  default_iface = (routes[2].split)[7]
+  ip = (`ip addr show dev #{default_iface}`.chomp.lines[2].split)[1]
+
+  puts lightblue("#{default_iface}: #{ip}")
+rescue
+  puts red("no network")
+end

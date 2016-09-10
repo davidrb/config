@@ -6,6 +6,8 @@ install:
 	ln -f -s `pwd`/vifm ~/.config/vifm
 	# xmonad
 	ln -f -s `pwd`/xmonad ~/.xmonad
+	# xmobar
+	ln -f -s `pwd`/xmobarrc ~/.xmobarrc
 	# terminator
 	ln -f -s `pwd`/terminator ~/.config/terminator
 
@@ -25,9 +27,8 @@ install_yaourt: install_package_query
 	cd build/yaourt-git; makepkg -s
 	sudo pacman -U build/yaourt-git/*.pkg*
 
-install_packages:
+install_packages: install
 	yaourt --needed -S - < pkglist.txt
 
-
 update_pkglist:
-	yaourt -Qqn > pkglist.txt
+	yaourt -Qq > pkglist.txt

@@ -1,0 +1,64 @@
+#!/bin/env ruby
+
+require 'rss'
+require 'open-uri'
+
+statuses = []
+
+def wrap( str, color ) 
+#  return "&lt;<fc='#{color}'>#{str}</span>&gt;"
+  return "<<fc=#{color}>#{str}</fc>>"
+end
+
+# date and time
+statuses << wrap(`date +"%a %b %d %I:%M%P"`.chomp.lines[0], "green")
+
+# hostname
+whoami = `whoami`.chomp
+hostname = `hostname`.chomp
+cwd = `cat ~/.cwd`.chomp
+statuses << wrap("#{whoami}@#{hostname} #{cwd}", "lightblue")
+
+# packages
+packages = `yaourt -Qu`.chomp.lines.count
+
+if packages == 0
+    statuses << wrap("all packages up to date", "green")
+elsif
+    statuses << wrap("#{packages} packages out of date", "red")
+end
+
+# network
+begin
+  routes = `route -n`.chomp.lines
+  default_iface = (routes[2].split)[7]
+  ip = (`ip addr show dev #{default_iface}`.chomp.lines[2].split)[1]
+
+  statuses << wrap("#{default_iface}: #{ip}", "lightblue")
+rescue
+  statuses << wrap("no network", "red")
+end
+
+# disk usage
+name, _, used, size, percent = `df -h /`.chomp.lines[1].split
+df = "#{name} usage: #{used}/#{size} (#{percent})"
+statuses << wrap(df, "orange")
+
+# arch rss
+begin
+    open('https://www.archlinux.org/feeds/news/') do |rss|
+      feed = RSS::Parser.parse(rss)
+      item = feed.items.first
+
+      elapsed = ((Time.now - item.date)/60/60/24).to_i
+
+      statuses << wrap("#{feed.items.first.title}(#{elapsed} days ago)", "green")
+    end
+rescue
+      statuses << wrap("could not open rss feed", "red")
+end
+
+puts statuses.join
+File.open(".status.txt", "w") do |f|
+    f << statuses.join
+end

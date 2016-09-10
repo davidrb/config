@@ -1,0 +1,20 @@
+Config {
+    font = "xft:Monospace-8,style=regular,antialias=true"
+    --font = "xft:Ubuntu Mono:-Pixelsize=18,dpi=96,rgba=rgb,style=regular,hinting=true,antialias=true,hintstyle=hintfull"
+    bgColor = "#000000",
+    fgColor = "#ffffff",
+    position = TopW L 90,
+    lowerOnStart = True,
+    commands = [
+        Run Com "/home/david/status" [] "status" 1,
+        Run Com "config/status/date" [] "date" 1,
+        Run Com "config/status/pacman" [] "pacman" 300,
+        Run Com "config/status/hostname" [] "hostname" 0,
+        Run Com "config/status/network" [] "network" 1,
+        Run StdinReader
+    ],
+    sepChar = "%",
+    alignSep = "}{",
+    -- template = "%StdinReader% | %status%"
+    template = "<%date%><%hostname%><%pacman%><%network%>"
+}

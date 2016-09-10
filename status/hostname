@@ -1,0 +1,8 @@
+#!/bin/env ruby
+
+require_relative 'color'
+
+whoami = `whoami`.chomp
+hostname = `hostname`.chomp
+
+puts lightblue("#{whoami}@#{hostname}")

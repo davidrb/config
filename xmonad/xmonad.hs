@@ -24,7 +24,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Actions.NoBorders
 
 main = do
-      h <- spawnPipe "xmobar -a left"
+      h <- spawnPipe "xmobar -a left -o"
       xmonad $ myConfig h
 
 myConfig h = additionalKeys (defaultConfig {    
@@ -39,39 +39,34 @@ myConfig h = additionalKeys (defaultConfig {
 }) myKeys
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["main", "secondary", "3", "4", "5"]
+myWorkspaces = map show [1..9]
 
 myLog h = dynamicLogWithPP $ defaultPP { ppOutput=hPutStrLn h }
 
-myManage = insertPosition Master Newer <+> manageDocks <+> floatPqiv
-    where floatPqiv = title =? "tohsaka" --> (ask >>= \w -> liftX (toggleBorder w) >> idHook)
+myManage = manageDocks
 
-myLayout = modWorkspaces ["main", "secondary"] avoidStruts $ 
-           modWorkspaces ["main", "secondary", "4", "5"] smartBorders $ 
-           modWorkspaces ["fullscreen"] noBorders $
-           modWorkspace "main" (workspaceDir "/home/david") $ 
-	   onWorkspace "main" (Main ||| tiled ||| Full) $
-           onWorkspace "secondary" (Secondary ||| tiled ||| Full) $
-           onWorkspace "fullscreen" Full $
-           onWorkspaces ["3", "4"] (Full ||| tiled) 
-           (Full ||| tiled)
+myLayout = modWorkspaces myWorkspaces smartBorders $ 
+           modWorkspaces myWorkspaces avoidStruts $ 
+           modWorkspace "1" (workspaceDir "/home/david") $ 
+           (tiled ||| Main ||| Secondary ||| Full)
                 where tiled = (Tall 1 (3/100) (1/2))
 
 myKeys = [
     ((mod1Mask .|. shiftMask, xK_x), changeDir defaultXPConfig)
     ,((mod1Mask .|. shiftMask, xK_b), spawn "uzbl-browser")
     ,((mod1Mask,  xK_g ), withFocused toggleBorder)
+    ,((mod1Mask,  xK_s ), sendMessage ToggleStruts)
     ,((mod1Mask,  xK_u ), withFocused unmanage)]
 
 myStartup = do
 	  spawn "unclutter --timeout 1"
           spawn "nitrogen --restore"
---          spawn "trayer-srg --monitor 0 --tint 0x000000 --edge top --align right --widthtype request --SetPartialStrut true --height 20 --SetDockType true"
+          spawn "trayer --height 35 --SetDockType true --widthtype percent --width 3 --expand true --SetPartialStrut true --alpha 255 --align right --edge top"
           spawn "pa-applet"
+          spawn "mate-power-manager"
+          spawn "nm-applet"
 
---
 -- Main Layout
---
 data Main a = Main deriving (Show, Read)
 
 instance LayoutClass Main a where
@@ -87,9 +82,7 @@ mainTile r n = if (n <= 3)
                   where r1:r2:r3:_ = splitHorizontally 3 r
                         rs = splitVertically (n-2) r3
 
---
 -- Secondary Layout
---
 data Secondary a = Secondary deriving (Show, Read)
 
 instance LayoutClass Secondary a where
