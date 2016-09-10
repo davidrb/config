@@ -11,10 +11,11 @@ Config {
         Run Com "config/status/pacman" [] "pacman" 300,
         Run Com "config/status/hostname" [] "hostname" 0,
         Run Com "config/status/network" [] "network" 1,
+        Run Com "config/status/rss" [] "rss" 600,
         Run StdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
     -- template = "%StdinReader% | %status%"
-    template = "<%date%><%hostname%><%pacman%><%network%>"
+    template = "<%date%><%hostname%><%pacman%><%network%><%rss%>"
 }
