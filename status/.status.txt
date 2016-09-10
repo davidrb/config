@@ -1,1 +1,0 @@
-<<fc=green>Fri Sep 09 06:05pm</fc>><<fc=lightblue>david@davids_laptop </fc>><<fc=green>all packages up to date</fc>><<fc=lightblue>wlp8s0: 192.168.1.112/24</fc>><<fc=orange>/dev/sda3 usage: 57G/157G (27%)</fc>><<fc=green>TeXLive 2016 packages are now available(34 days ago)</fc>>

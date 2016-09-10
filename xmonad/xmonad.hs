@@ -22,6 +22,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.InsertPosition
 
 import XMonad.Actions.NoBorders
+import XMonad.Actions.CycleWS
+import XMonad.Actions.RotSlaves
 
 main = do
       h <- spawnPipe "xmobar -a left -o"
@@ -56,7 +58,9 @@ myKeys = [
     ,((mod1Mask .|. shiftMask, xK_b), spawn "uzbl-browser")
     ,((mod1Mask,  xK_g ), withFocused toggleBorder)
     ,((mod1Mask,  xK_s ), sendMessage ToggleStruts)
-    ,((mod1Mask,  xK_u ), withFocused unmanage)]
+    ,((mod1Mask,  xK_u ), withFocused unmanage)
+    ,((mod1Mask,  xK_l),  rotAllDown)
+    ,((mod1Mask,  xK_h),    rotAllUp)]
 
 myStartup = do
 	  spawn "unclutter --timeout 1"

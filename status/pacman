@@ -2,7 +2,8 @@
 
 require_relative 'color'
 
-if 0 == packages = `yaourt -Qu`.chomp.lines.count
+`#{`pwd`}/sync`
+if 0 == packages = `yaourt -Qu --aur`.chomp.lines.count
     puts green("all packages up to date")
 elsif
     puts red("#{packages} packages out of date")

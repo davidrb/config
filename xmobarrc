@@ -6,11 +6,10 @@ Config {
     position = TopW L 90,
     lowerOnStart = True,
     commands = [
-        Run Com "/home/david/status" [] "status" 1,
         Run Com "config/status/date" [] "date" 1,
-        Run Com "config/status/pacman" [] "pacman" 300,
+        Run Com "config/status/pacman" [] "pacman" 60,
         Run Com "config/status/hostname" [] "hostname" 0,
-        Run Com "config/status/network" [] "network" 1,
+        Run Com "config/status/network" [] "network" 5,
         Run Com "config/status/rss" [] "rss" 600,
         Run StdinReader
     ],
