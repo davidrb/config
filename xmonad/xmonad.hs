@@ -69,6 +69,7 @@ myStartup = do
           spawn "pa-applet"
           spawn "mate-power-manager"
           spawn "nm-applet"
+          spawn "compton -b"
 
 -- Main Layout
 data Main a = Main deriving (Show, Read)
