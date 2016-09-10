@@ -7,7 +7,7 @@ Config {
     lowerOnStart = True,
     commands = [
         Run Com "config/status/date" [] "date" 1,
-        Run Com "config/status/pacman" [] "pacman" 60,
+        Run Com "config/status/packages" [] "packages" 60,
         Run Com "config/status/hostname" [] "hostname" 0,
         Run Com "config/status/network" [] "network" 5,
         Run Com "config/status/rss" [] "rss" 600,
@@ -16,5 +16,5 @@ Config {
     sepChar = "%",
     alignSep = "}{",
     -- template = "%StdinReader% | %status%"
-    template = "<%date%><%hostname%><%pacman%><%network%><%rss%>"
+    template = "<%date%><%hostname%><%packages%><%network%><%rss%>"
 }

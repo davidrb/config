@@ -1,5 +1,0 @@
-#!/bin/env ruby
-
-require_relative 'color'
-
-`yaourt -Sy --aur`
