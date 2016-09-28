@@ -35,15 +35,12 @@ myConfig h = additionalKeys (defaultConfig {
     startupHook = myStartup,
     layoutHook = myLayout,
     manageHook = myManage,
-    logHook = myLog h,
     workspaces = myWorkspaces,
     handleEventHook = docksEventHook
 }) myKeys
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1..9]
-
-myLog h = dynamicLogWithPP $ defaultPP { ppOutput=hPutStrLn h }
 
 myManage = manageDocks
 
