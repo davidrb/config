@@ -13,8 +13,8 @@ set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 
 syntax on
 
