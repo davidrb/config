@@ -1,0 +1,4 @@
+#!/bin/env ruby
+require_relative 'color'
+
+puts color(:green, `date +"%a %b %d %I:%M:%S%P"`.chomp.lines[0])

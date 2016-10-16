@@ -1,0 +1,19 @@
+#!/bin/env ruby
+
+require_relative 'color'
+require 'rss'
+require 'open-uri'
+
+# arch rss
+begin
+    open('https://www.archlinux.org/feeds/news/') do |rss|
+      feed = RSS::Parser.parse(rss)
+      item = feed.items.first
+
+      elapsed = ((Time.now - item.date)/60/60/24).to_i
+
+      puts green("Arch News: #{feed.items.first.title}(#{elapsed} days ago)")
+    end
+rescue
+      puts red("could not open rss feed", "red")
+end

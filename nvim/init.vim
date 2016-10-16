@@ -26,4 +26,5 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fireplace'
 call plug#end()

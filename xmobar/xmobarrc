@@ -1,0 +1,20 @@
+Config {
+    font = "xft:Monospace-8,style=regular,antialias=true"
+    --font = "xft:Ubuntu Mono:-Pixelsize=18,dpi=96,rgba=rgb,style=regular,hinting=true,antialias=true,hintstyle=hintfull"
+    bgColor = "#000000",
+    fgColor = "#ffffff",
+    position = TopW L 90,
+    lowerOnStart = True,
+    commands = [
+        Run Com "~/.xmobar/date" [] "date" 1,
+        Run Com "~/.xmobar/packages" [] "packages" 60,
+        Run Com "~/.xmobar/hostname" [] "hostname" 0,
+        Run Com "~/.xmobar/network" [] "network" 5,
+        Run Com "~/.xmobar/rss" [] "rss" 600,
+        Run StdinReader
+    ],
+    sepChar = "%",
+    alignSep = "}{",
+    -- template = "%StdinReader% | %status%"
+    template = "<%date%><%hostname%><%packages%><%network%><%rss%>"
+}

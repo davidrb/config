@@ -7,7 +7,7 @@ install:
 	# xmonad
 	ln -f -s `pwd`/xmonad ~/.xmonad
 	# xmobar
-	ln -f -s `pwd`/xmobarrc ~/.xmobarrc
+	ln -f -s `pwd`/xmobar ~/.xmobar
 	# terminator
 	ln -f -s `pwd`/terminator ~/.config/terminator
 
